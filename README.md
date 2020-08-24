@@ -69,7 +69,7 @@ The application will prompt you for responses, an example may look like the foll
 
 ```bash
 Is windows or linux required to run Simulator?: windows
-Directory of Simulator: sample/
+Directory of Simulator integration files: sample/
 What is the name of the file with microsoft bonsai api? (e.g., __main__.py): __main__.py
 Directory of requirements.txt: .
 Image Name (No underscores): my-first-sim

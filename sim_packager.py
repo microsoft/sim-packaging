@@ -154,7 +154,7 @@ def main():
     else:
         platform = input('Is windows or linux required to run Simulator?: ')
 
-    sim_path = input("Directory of Simulator: ")
+    sim_path = input("Directory of Simulator integration files: ")
     main_name = input("What is the name of the file with microsoft bonsai api? (e.g., __main__.py): ")
     
     if args.language == 'python_api':
@@ -165,9 +165,9 @@ def main():
         else:
             print('Please type in correct OS type')
             exit()
-
         req_path = input("Directory of requirements.txt: ")
-        shutil.copy(req_path+'/requirements.txt', sim_path)
+        if not os.path.isfile(req_path+'/requirements.txt'):
+            shutil.copy(req_path+'/requirements.txt', sim_path)
     elif args.language == 'java_api':
         print('This path has not been programmed yet...')
         exit()

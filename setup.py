@@ -9,6 +9,6 @@ setup(
         "azure-cli==2.10.1",
     ],
     entry_points={
-        'console_scripts': ['sim-pack=.sim_packager:main'],
+        'console_scripts': ['sim-pack=sim_packager:main'],
     }
 )
