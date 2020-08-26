@@ -176,7 +176,7 @@ def main():
         print('This path has not been programmed yet...')
         exit()
     else:
-        print('Please choose one the modes (e.g., python_api, java_api, C#_api')
+        print('Please choose one the modes (e.g., python_api, java_api, C#_api)')
         exit()
 
     img_name = input("Image Name (No underscores): ")
