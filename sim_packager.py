@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 from azure.cli.core import get_default_cli
 from typing import Dict, Union
 import os
