@@ -54,7 +54,7 @@ bonsai-cli==1.0.1
 
 ### 4. Run the Script
 
-Run `sim-pack <language_api>` where the `<language_api>` mode can consist of:
+Run `sim-pack <LANGUAGE_API>` where the `<LANGUAGE_API>` mode can consist of:
 - python_api
 - java_api
 - C#_api
@@ -75,6 +75,16 @@ Directory of requirements.txt: .
 Image Name (No underscores): my-first-sim
 Name of the ACR (without azurecr.io): mydemo
 ```
+
+### Optional flags
+
+If one desires to specify their base image for complex scenarios, use the `--base-img` flag and enter a string of the base image. This may be helpful in scenarios where the simulator is dependent on another base image other than the following: `python:3.7.4`for Linux and `mcr.microsoft.com/windows:10.0.17763.1040` for Windows. This can also be particularly useful when a base image is used with previously installed dependencies. When using a base image that cannot be downloadable without credentials, be sure the base image exists in the desired ACR.
+
+```bash
+sim-pack python_api --base-img <BASE_IMG>
+```
+
+>EXAMPLE: sim-pack python_api --base-img mydemo.azurecr.io/sample-base:latest
 
 ## Contribute Code
 This project welcomes contributions and suggestions. Most contributions require you to

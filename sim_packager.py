@@ -95,9 +95,12 @@ class AcrBuild:
             )
         )
 
-def write_linux_python_dfile(sim_path, main_name):
+def write_linux_python_dfile(sim_path, main_name, base_img):
     with open(sim_path+"/Dockerfile", 'w') as docker_fname:
-        docker_fname.write('FROM python:3.7.4\n')
+        if base_img:
+            docker_fname.write('FROM {}\n'.format(base_img))
+        else:
+            docker_fname.write('FROM python:3.7.4\n')
         docker_fname.write('RUN apt-get update && apt-get install -y --no-install-recommends && rm -rf /var/lib/apt/lists/*\n')
         docker_fname.write('WORKDIR /src\n')
         docker_fname.write('COPY . /src\n')
@@ -105,9 +108,12 @@ def write_linux_python_dfile(sim_path, main_name):
         docker_fname.write('RUN pip3 install -r requirements.txt\n')
         docker_fname.write('CMD ["python3", "{}"]\n'.format(main_name))
 
-def write_windows_python_dfile(sim_path, main_name):
+def write_windows_python_dfile(sim_path, main_name, base_img):
     with open(sim_path+"/Dockerfile", 'w') as docker_fname:
-        docker_fname.write('FROM mcr.microsoft.com/windows:10.0.17763.1040\n')
+        if base_img:
+            docker_fname.write('FROM {}\n'.format(base_img))
+        else:
+            docker_fname.write('FROM mcr.microsoft.com/windows:10.0.17763.1040\n')
         docker_fname.write('SHELL' + ' ["powershell", "-Command", "$ErrorActionPreference = ' + "'Stop'" + "; $ProgressPreference = 'SilentlyContinue';" '"]\n')
         docker_fname.write('ENV PYTHON_VERSION 3.7.6rc1\n')
         docker_fname.write('ENV PYTHON_RELEASE 3.7.6\n')
@@ -150,6 +156,11 @@ def main():
         type=str, 
         help='Type the platform the simulator must run on, (e.g., windows or linux)',
     )
+    parser.add_argument(
+        '--base-img',
+        type=str, 
+        help='Type the base image to build from to override (e.g., mcr.microsoft.com/windows:10.0.17763.1040)',
+    )
     args = parser.parse_args()
 
     if args.platform:
@@ -157,14 +168,16 @@ def main():
     else:
         platform = input('Is windows or linux required to run Simulator?: ')
 
+    base_img = args.base_img
+
     sim_path = input("Directory of Simulator integration files: ")
-    main_name = input("What is the name of the file with microsoft bonsai api? (e.g., __main__.py): ")
+    main_name = input("What is the name of the file with microsoft bonsai api? (e.g., main.py): ")
     
     if args.language == 'python_api':
         if platform == 'windows':
-            write_windows_python_dfile(sim_path, main_name)
+            write_windows_python_dfile(sim_path, main_name, base_img)
         elif platform == 'linux':
-            write_linux_python_dfile(sim_path, main_name)
+            write_linux_python_dfile(sim_path, main_name, base_img)
         else:
             print('Please type in correct OS type')
             exit()
@@ -183,7 +196,7 @@ def main():
         exit()
 
     img_name = input("Image Name (No underscores): ")
-    registry_name = input("Name of the ACR (without azurecr.io: ")
+    registry_name = input("Name of the ACR (without azurecr.io): ")
 
     acr_build_image = AcrBuild(
         image_name=img_name,
