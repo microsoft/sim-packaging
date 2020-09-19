@@ -101,7 +101,7 @@ def write_linux_python_dfile(sim_path, main_name, base_img):
             docker_fname.write('FROM {}\n'.format(base_img))
         else:
             docker_fname.write('FROM python:3.7.4\n')
-        docker_fname.write('RUN apt-get update && apt-get install -y --no-install-recommends && rm -rf /var/lib/apt/lists/*\n')
+        docker_fname.write('RUN apt-get update && apt-get install vim -y --no-install-recommends && rm -rf /var/lib/apt/lists/*\n')
         docker_fname.write('WORKDIR /src\n')
         docker_fname.write('COPY . /src\n')
         docker_fname.write('RUN pip3 install setuptools wheel\n')
@@ -139,6 +139,8 @@ def write_windows_python_dfile(sim_path, main_name, base_img):
         docker_fname.write('COPY . /src\n')
         docker_fname.write('RUN pip3 install setuptools wheel\n')
         docker_fname.write('RUN pip3 install -r requirements.txt\n')
+        docker_fname.write("RUN Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))\n")
+        docker_fname.write('RUN choco install git -y\n')
         docker_fname.write('CMD ["python", "{}"]\n'.format(main_name))
 
 def main():
