@@ -1,7 +1,7 @@
 # Sim Packaging
-Tooling to abstract away docker building of simulators that cannot be zip file dropped into the Bonsai Service as the status quo. It is a CLI tool which prompts for dependencies, OS requirements, logs into ACR, builds, and pushes for you.
+Tooling to abstract away docker building of simulators that cannot be zip file dropped into the Bonsai Service as the status quo. It is a CLI tool which prompts for simulator dependencies, OS requirements, authenticates with ACR, builds, and pushes for you.
 
-> DISCLAIMER: This application is considered experimental and NOT an official Microsoft Bonsai tool. Use as one likes, feel free to submit PRs with fixes and small enhancements. We DO expect this to be replaced by in-product features of Microsoft Bonsai in the next few months, so we DO NOT encourage major contributions. 
+🚩 Disclaimer: This is not an official Microsoft product. This application is considered an experimental addition to Microsoft Project Bonsai's software toolchain. It's primary goal is to reduce barriers of entry to use Project Bonsai's core Machine Teaching. Pull requests for fixes and small enhancements are welcome, but we do expect this to be replaced by out-of-the-box features of Project Bonsai in the near future.
 
 ## Requirements
 - Python 3.7+
@@ -59,6 +59,8 @@ Run `sim-pack <LANGUAGE_API>` where the `<LANGUAGE_API>` mode can consist of:
 - java_api
 - C#_api
 
+> Note: Only the python path is functional.
+
 For example, the python route will look like the following.
 
 ```bash
@@ -84,7 +86,7 @@ If one desires to specify their base image for complex scenarios, use the `--bas
 sim-pack python_api --base-img <BASE_IMG>
 ```
 
->EXAMPLE: sim-pack python_api --base-img mydemo.azurecr.io/sample-base:latest
+>Example: sim-pack python_api --base-img mydemo.azurecr.io/sample-base:latest
 
 ## Contribute Code
 This project welcomes contributions and suggestions. Most contributions require you to
