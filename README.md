@@ -1,7 +1,7 @@
 # Sim Packaging
 Tooling to abstract away docker building of simulators that cannot be zip file dropped into the Bonsai Service as the status quo. It is a CLI tool which prompts for simulator dependencies, OS requirements, authenticates with ACR, builds, and pushes for you.
 
-🚩 Disclaimer: This is not an official Microsoft product. This application is considered an experimental addition to Microsoft Project Bonsai's software toolchain. It's primary goal is to reduce barriers of entry to use Project Bonsai's core Machine Teaching. Pull requests for fixes and small enhancements are welcome, but we do expect this to be replaced by out-of-the-box features of Project Bonsai in the near future.
+>🚩 Disclaimer: This is not an official Microsoft product. This application is considered an experimental addition to Microsoft Project Bonsai's software toolchain. It's primary goal is to reduce barriers of entry to use Project Bonsai's core Machine Teaching. Pull requests for fixes and small enhancements are welcome, but we do expect this to be replaced by out-of-the-box features of Project Bonsai in the near future.
 
 ## Requirements
 - Python 3.7+
